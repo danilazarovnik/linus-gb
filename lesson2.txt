@@ -1,0 +1,176 @@
+(base) danilazarovnik@MacBook-Pro-Danila-2 ~ % ssh parallels@192.168.0.113
+parallels@192.168.0.113's password: 
+Welcome to Ubuntu 20.04.2 LTS (GNU/Linux 5.4.0-66-generic aarch64)
+
+
+
+1. Навигация по файловой системе. Попрактиковаться в перемещении между каталогами, используя полный и относительный путь. Перечислить, какие параметры команды cd позволят быстро вернуться в домашний каталог, позволят перейти на уровень выше.
+
+
+
+parallels@ubuntu-gb:~$ pwd
+/home/parallels
+
+parallels@ubuntu-gb:~$ cd /usr/local/bin
+parallels@ubuntu-gb:/usr/local/bin$ pwd
+/usr/local/bin
+
+parallels@ubuntu-gb:/usr/local/bin$ cd ~
+parallels@ubuntu-gb:~$ pwd
+/home/parallels
+
+parallels@ubuntu-gb:~$ cd /home
+parallels@ubuntu-gb:/home$ cd parallels
+parallels@ubuntu-gb:~$ pwd
+/home/parallels
+
+parallels@ubuntu-gb:~$ la
+ .bash_history   file2.txt          .profile                    Музыка
+ .bash_logout    .gnupg             .sudo_as_admin_successful   Общедоступные
+ .bashrc         lesson2            .viminfo                   'Рабочий стол'
+ .cache          .local             Видео                       Шаблоны
+ .config         .mozilla           Документы
+ Desktop         .pam_environment   Загрузки
+ file1.txt       .parallels         Изображения
+
+parallels@ubuntu-gb:~$ ls -l
+итого 44
+drwxr-xr-x 2 parallels parallels 4096 мая 26 21:06  Desktop
+-rw-rw-r-- 1 parallels parallels   38 мая 30 14:53  file1.txt
+-rw-rw-r-- 1 parallels parallels    0 мая 30 14:25  file2.txt
+drwxrwxr-x 2 parallels parallels 4096 мая 30 14:32  lesson2
+drwxr-xr-x 2 parallels parallels 4096 мая 26 22:35  Видео
+drwxr-xr-x 2 parallels parallels 4096 мая 26 22:35  Документы
+drwxr-xr-x 2 parallels parallels 4096 мая 26 22:35  Загрузки
+drwxr-xr-x 2 parallels parallels 4096 мая 26 22:35  Изображения
+drwxr-xr-x 2 parallels parallels 4096 мая 26 22:35  Музыка
+drwxr-xr-x 2 parallels parallels 4096 мая 26 22:35  Общедоступные
+drwxr-xr-x 2 parallels parallels 4096 мая 26 22:35 'Рабочий стол'
+drwxr-xr-x 2 parallels parallels 4096 мая 26 22:35  Шаблоны
+
+parallels@ubuntu-gb:~$ ls -a
+ .               .config     .local                      .viminfo      Общедоступные
+ ..              Desktop     .mozilla                    Видео        'Рабочий стол'
+ .bash_history   file1.txt   .pam_environment            Документы     Шаблоны
+ .bash_logout    file2.txt   .parallels                  Загрузки
+ .bashrc         .gnupg      .profile                    Изображения
+ .cache          lesson2     .sudo_as_admin_successful   Музыка
+
+parallels@ubuntu-gb:~$ cd ./.config
+parallels@ubuntu-gb:~/.config$ pwd
+/home/parallels/.config
+
+parallels@ubuntu-gb:~/.config$ cd ..
+parallels@ubuntu-gb:~$ pwd
+/home/parallels
+
+parallels@ubuntu-gb:~$ ls -la
+итого 100
+drwxr-xr-x 18 parallels parallels 4096 мая 30 14:53  .
+drwxr-xr-x  3 root      root      4096 мар 13 11:28  ..
+-rw-------  1 parallels parallels  170 мая 30 13:59  .bash_history
+-rw-r--r--  1 parallels parallels  220 фев 25  2020  .bash_logout
+-rw-r--r--  1 parallels parallels 3771 фев 25  2020  .bashrc
+drwx------ 14 parallels parallels 4096 мая 26 22:46  .cache
+drwx------ 12 parallels parallels 4096 мая 30 13:49  .config
+drwxr-xr-x  2 parallels parallels 4096 мая 26 21:06  Desktop
+-rw-rw-r--  1 parallels parallels   38 мая 30 14:53  file1.txt
+-rw-rw-r--  1 parallels parallels    0 мая 30 14:25  file2.txt
+drwx------  3 parallels parallels 4096 мая 26 21:05  .gnupg
+drwxrwxr-x  2 parallels parallels 4096 мая 30 14:32  lesson2
+drwxr-xr-x  3 parallels parallels 4096 мар 13 11:55  .local
+drwx------  5 parallels parallels 4096 мая 26 21:07  .mozilla
+-rw-r--r--  1 parallels parallels  354 мая 26 22:35  .pam_environment
+drwxr-xr-x  2 parallels parallels 4096 мая 26 21:06  .parallels
+-rw-r--r--  1 parallels parallels  807 фев 25  2020  .profile
+-rw-r--r--  1 parallels parallels    0 мар 13 11:29  .sudo_as_admin_successful
+-rw-------  1 parallels parallels 1694 мая 30 14:50  .viminfo
+drwxr-xr-x  2 parallels parallels 4096 мая 26 22:35  Видео
+drwxr-xr-x  2 parallels parallels 4096 мая 26 22:35  Документы
+drwxr-xr-x  2 parallels parallels 4096 мая 26 22:35  Загрузки
+drwxr-xr-x  2 parallels parallels 4096 мая 26 22:35  Изображения
+drwxr-xr-x  2 parallels parallels 4096 мая 26 22:35  Музыка
+drwxr-xr-x  2 parallels parallels 4096 мая 26 22:35  Общедоступные
+drwxr-xr-x  2 parallels parallels 4096 мая 26 22:35 'Рабочий стол'
+drwxr-xr-x  2 parallels parallels 4096 мая 26 22:35  Шаблоны
+
+parallels@ubuntu-gb:~$ cd /
+
+parallels@ubuntu-gb:/$ ls
+bin   cdrom  etc   lib         media  opt   root  sbin  srv       sys  usr
+boot  dev    home  lost+found  mnt    proc  run   snap  swap.img  tmp  var
+
+parallels@ubuntu-gb:/$ cd ~
+parallels@ubuntu-gb:~$ pwd
+/home/parallels
+
+parallels@ubuntu-gb:~$ cd /home/parallels/Загрузки
+parallels@ubuntu-gb:~/Загрузки$ ls -la
+итого 8
+drwxr-xr-x  2 parallels parallels 4096 мая 26 22:35 .
+drwxr-xr-x 18 parallels parallels 4096 мая 30 14:53 ..
+
+parallels@ubuntu-gb:~/Загрузки$ cd ~
+
+
+
+2. Управление файлами и каталогами и текстовые редакторы. Создать файл с наполнением, используя несколько способов. Использовать разобранные текстовые редакторы для наполнения файлов данными. Создать копии созданных файлов, создать несколько каталогов с подкаталогами, перенести несколько файлов в созданные каталоги. Перечислить команды и используемые параметры команд.
+
+
+
+parallels@ubuntu-gb:~$ touch file1.txt
+parallels@ubuntu-gb:~$ touch file2.txt
+parallels@ubuntu-gb:~$ ls
+ Desktop     file2.txt   Документы   Изображения   Общедоступные   Шаблоны
+ file1.txt   Видео       Загрузки    Музыка       'Рабочий стол'
+
+parallels@ubuntu-gb:~$ mkdir lessin2
+
+parallels@ubuntu-gb:~$ mv lessin2 lession2
+parallels@ubuntu-gb:~$ mv lession2 lesson2
+parallels@ubuntu-gb:~$ rm file3.txt
+parallels@ubuntu-gb:~$ cp file1.txt file3.txt
+parallels@ubuntu-gb:~$ cp file2.txt lesson2
+parallels@ubuntu-gb:~$ cp -r lesson2 lesson2_copy
+parallels@ubuntu-gb:~$ mv file3.txt lesson2
+
+parallels@ubuntu-gb:~$ ls
+ Desktop     lesson2        Документы     Музыка          Шаблоны
+ file1.txt   lesson2_copy   Загрузки      Общедоступные
+ file2.txt   Видео          Изображения  'Рабочий стол'
+
+parallels@ubuntu-gb:~$ ls lesson2
+file2.txt  file3.txt
+
+parallels@ubuntu-gb:~$ rm -r lesson2_copy
+parallels@ubuntu-gb:~$ rm ./lesson2/file3.txt
+parallels@ubuntu-gb:~$ ls lesson2
+file2.txt
+
+parallels@ubuntu-gb:~$ ls
+ Desktop     lesson2     Загрузки      Общедоступные
+ file1.txt   Видео       Изображения  'Рабочий стол'
+ file2.txt   Документы   Музыка        Шаблоны
+
+parallels@ubuntu-gb:~$ cat /etc/passwd
+parallels@ubuntu-gb:~$ more /etc/passwd
+parallels@ubuntu-gb:~$ less /etc/passwd
+parallels@ubuntu-gb:~$ tail /etc/passwd
+parallels@ubuntu-gb:~$ cat file1.txt
+
+parallels@ubuntu-gb:~$ sudo apt install vim
+[sudo] пароль для parallels:
+parallels@ubuntu-gb:~$ vim file1.txt
+parallels@ubuntu-gb:~$ cat file1.txt
+Line 2
+Line 34353
+Line dsdcsdc
+
+parallels@ubuntu-gb:~$ sudo apt install nano
+parallels@ubuntu-gb:~$ nano file1.txt
+
+
+parallels@ubuntu-gb:~$ exit
+выход
+Connection to 192.168.0.113 closed.
+(base) danilazarovnik@MacBook-Pro-Danila-2 ~ % 
