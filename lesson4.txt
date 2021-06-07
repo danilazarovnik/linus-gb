@@ -1,0 +1,59 @@
+1. Потоки ввода/вывода. Создать файл, используя команду echo. Используя команду cat, прочитать содержимое каталога etc, ошибки перенаправить в отдельный файл.
+
+parallels@ubuntu-gb:~$ nano testfile.txt
+parallels@ubuntu-gb:~$ cat < testfile.txt 
+Hello team!
+parallels@ubuntu-gb:~$ echo 'hello again team'
+hello again team
+parallels@ubuntu-gb:~$ echo 'hello again team' > testfile.txt 
+parallels@ubuntu-gb:~$ cat testfile.txt 
+hello again team
+parallels@ubuntu-gb:~$ echo 'hello again team' >> testfile.txt 
+parallels@ubuntu-gb:~$ cat testfile.txt 
+hello again team
+hello again team
+
+parallels@ubuntu-gb:~$ cat /etc/* 2> error.log
+
+
+2. Конвейер (pipeline). Использовать команду cut на вывод длинного списка каталога, чтобы отобразить только права доступа к файлам. Затем отправить в конвейере этот вывод на sort и uniq, чтобы отфильтровать все повторяющиеся строки.
+
+parallels@ubuntu-gb:~$ ls -l | cut -d' ' -f1
+parallels@ubuntu-gb:~$ ls -l | cut -d' ' -f1 | sort | uniq
+
+
+3. Управление процессами.) Изменить конфигурационный файл службы SSH: /etc/ssh/sshd_config, отключив аутентификацию по паролю PasswordAuthentication no. Выполните рестарт службы systemctl restart sshd (service sshd restart), верните аутентификацию по паролю, выполните reload службы systemctl reload sshd (services sshd reload). В чём различие между действиями restart и reload? Создайте файл при помощи команды cat > file_name, напишите текст и завершите комбинацией ctrl+d. Какой сигнал передадим процессу?
+
+parallels@ubuntu-gb:~$ sudo nano /etc/ssh/sshd_config
+parallels@ubuntu-gb:~$ systemctl restart sshd
+==== AUTHENTICATING FOR org.freedesktop.systemd1.manage-units ===
+Authentication is required to restart 'ssh.service'.
+Multiple identities can be used for authentication:
+ 1.  parallels
+ 2.  user1
+Choose identity to authenticate as (1-2): 1
+Password: 
+==== AUTHENTICATION COMPLETE ===
+
+parallels@ubuntu-gb:~$ systemctl reload sshd
+==== AUTHENTICATING FOR org.freedesktop.systemd1.manage-units ===
+Authentication is required to reload 'ssh.service'.
+Multiple identities can be used for authentication:
+ 1.  parallels
+ 2.  user1
+Choose identity to authenticate as (1-2): 1
+Password: 
+==== AUTHENTICATION COMPLETE ===
+
+parallels@ubuntu-gb:~$ cat > file_name
+hello team
+parallels@ubuntu-gb:~$ cat file_name 
+hello team
+
+
+4. Сигналы процессам. Запустите mc. Используя ps, найдите PID процесса, завершите процесс, передав ему сигнал 9.
+
+parallels@ubuntu-gb:~$ mc
+parallels@ubuntu-gb:~$ ps -ef
+parallels@ubuntu-gb:~$ kill -9 13113
+parallels@ubuntu-gb:~$ ps -ef
