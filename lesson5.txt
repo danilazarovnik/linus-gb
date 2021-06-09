@@ -1,0 +1,97 @@
+1. Создать файл file1 и наполнить его произвольным содержимым. Скопировать его в file2. Создать символическую ссылку file3 на file1. Создать жёсткую ссылку file4 на file1. Посмотреть, какие inode у файлов. Удалить file1. Что стало с остальными созданными файлами? Попробовать вывести их на экран.
+
+parallels@ubuntu-gb:~$ mkdir lesson5
+parallels@ubuntu-gb:~$ cd ./lesson5
+parallels@ubuntu-gb:~/lesson5$ echo "some text" > file1.txt
+parallels@ubuntu-gb:~/lesson5$ cp file1.txt file2.txt
+parallels@ubuntu-gb:~/lesson5$ ln -s file1.txt file3.txt
+parallels@ubuntu-gb:~/lesson5$ ls -l
+итого 8
+-rw-rw-r-- 1 parallels parallels 10 июн  9 23:34 file1.txt
+-rw-rw-r-- 1 parallels parallels 10 июн  9 23:34 file2.txt
+lrwxrwxrwx 1 parallels parallels  9 июн  9 23:35 file3.txt -> file1.txt
+
+parallels@ubuntu-gb:~/lesson5$ ln ./file1.txt ./file4.txt
+parallels@ubuntu-gb:~/lesson5$ ls -li
+итого 12
+1311553 -rw-rw-r-- 2 parallels parallels 10 июн  9 23:34 file1.txt
+1311554 -rw-rw-r-- 1 parallels parallels 10 июн  9 23:34 file2.txt
+1311555 lrwxrwxrwx 1 parallels parallels  9 июн  9 23:35 file3.txt -> file1.txt
+1311553 -rw-rw-r-- 2 parallels parallels 10 июн  9 23:34 file4.txt
+
+parallels@ubuntu-gb:~/lesson5$ rm file1.txt
+parallels@ubuntu-gb:~/lesson5$ ls -li
+итого 8
+1311554 -rw-rw-r-- 1 parallels parallels 10 июн  9 23:34 file2.txt
+1311555 lrwxrwxrwx 1 parallels parallels  9 июн  9 23:35 file3.txt -> file1.txt
+1311553 -rw-rw-r-- 1 parallels parallels 10 июн  9 23:34 file4.txt
+
+parallels@ubuntu-gb:~/lesson5$ cat file3.txt
+cat: file3.txt: Нет такого файла или каталога
+parallels@ubuntu-gb:~/lesson5$ cat file4.txt
+some text
+
+
+2. Дать созданным файлам другие, произвольные имена. Создать новую символическую ссылку. Переместить ссылки в другую директорию.
+
+parallels@ubuntu-gb:~/lesson5$ rm file3.txt 
+parallels@ubuntu-gb:~/lesson5$ mv file2.txt newfile2.txt
+parallels@ubuntu-gb:~/lesson5$ mv file4.txt newfile4.txt
+parallels@ubuntu-gb:~/lesson5$ ls -li
+итого 8
+1311554 -rw-rw-r-- 1 parallels parallels 10 июн  9 23:34 newfile2.txt
+1311553 -rw-rw-r-- 1 parallels parallels 10 июн  9 23:34 newfile4.txt
+
+parallels@ubuntu-gb:~/lesson5$ mkdir tmp
+parallels@ubuntu-gb:~/lesson5$ ln -s newfile2.txt newfile3.txt
+parallels@ubuntu-gb:~/lesson5$ ls -li
+итого 12
+1311554 -rw-rw-r-- 1 parallels parallels   10 июн  9 23:34 newfile2.txt
+1311557 lrwxrwxrwx 1 parallels parallels   12 июн  9 23:47 newfile3.txt -> newfile2.txt
+1311553 -rw-rw-r-- 1 parallels parallels   10 июн  9 23:34 newfile4.txt
+1311555 drwxrwxr-x 2 parallels parallels 4096 июн  9 23:46 tmp
+
+parallels@ubuntu-gb:~/lesson5$ mv newfile3.txt ./tmp
+parallels@ubuntu-gb:~/lesson5$ cd ./tmp
+parallels@ubuntu-gb:~/lesson5/tmp$ ls -l
+итого 0
+lrwxrwxrwx 1 parallels parallels 12 июн  9 23:47 newfile3.txt -> newfile2.txt
+parallels@ubuntu-gb:~/lesson5/tmp$ cat newfile3.txt 
+cat: newfile3.txt: Нет такого файла или каталога
+#Ссылка после перемещения недействительная
+
+
+3. Создать два произвольных файла. Первому присвоить права на чтение и запись для владельца и группы, только на чтение — для всех. Второму присвоить права на чтение и запись только для владельца. Сделать это в численном и символьном виде.
+
+parallels@ubuntu-gb:~/lesson5/tmp$ cd ..
+parallels@ubuntu-gb:~/lesson5$ touch file1.sh
+parallels@ubuntu-gb:~/lesson5$ touch file2.sh
+parallels@ubuntu-gb:~/lesson5$ chmod ug=rw- file1.sh
+parallels@ubuntu-gb:~/lesson5$ chmod o=r file1.sh
+parallels@ubuntu-gb:~/lesson5$ ls -l
+итого 12
+-rw-rw-r-- 1 parallels parallels    0 июн  9 23:55 file1.sh
+-rw-rw-r-- 1 parallels parallels    0 июн  9 23:55 file2.sh
+-rw-rw-r-- 1 parallels parallels   10 июн  9 23:34 newfile2.txt
+-rw-rw-r-- 1 parallels parallels   10 июн  9 23:34 newfile4.txt
+drwxrwxr-x 2 parallels parallels 4096 июн  9 23:48 tmp
+
+parallels@ubuntu-gb:~/lesson5$ chmod u=rw file2.sh
+parallels@ubuntu-gb:~/lesson5$ chmod og=--- file2.sh
+parallels@ubuntu-gb:~/lesson5$ ls -l
+итого 12
+-rw-rw-r-- 1 parallels parallels    0 июн  9 23:55 file1.sh
+-rw------- 1 parallels parallels    0 июн  9 23:55 file2.sh
+-rw-rw-r-- 1 parallels parallels   10 июн  9 23:34 newfile2.txt
+-rw-rw-r-- 1 parallels parallels   10 июн  9 23:34 newfile4.txt
+drwxrwxr-x 2 parallels parallels 4096 июн  9 23:48 tmp
+
+parallels@ubuntu-gb:~/lesson5$ chmod 664 file1.sh
+parallels@ubuntu-gb:~/lesson5$ chmod 600 file2.sh
+parallels@ubuntu-gb:~/lesson5$ ls -l
+итого 12
+-rw-rw-r-- 1 parallels parallels    0 июн  9 23:55 file1.sh
+-rw------- 1 parallels parallels    0 июн  9 23:55 file2.sh
+-rw-rw-r-- 1 parallels parallels   10 июн  9 23:34 newfile2.txt
+-rw-rw-r-- 1 parallels parallels   10 июн  9 23:34 newfile4.txt
+drwxrwxr-x 2 parallels parallels 4096 июн  9 23:48 tmp
